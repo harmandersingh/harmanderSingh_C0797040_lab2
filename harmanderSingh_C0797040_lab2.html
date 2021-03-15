@@ -1,0 +1,88 @@
+<html>
+<font size="8" color="green">Final test lab</font><br><br>
+
+<label for="t1" id="label_rows">Number of rows: </label><input type="text" id="t1" /><br><br>
+<label for="t1" id="label_cols">Number of cols: </label><input type="text" id="t2" /><br><br>
+
+<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+
+<button id="b2" onclick="addColumn()">Add Column</button>
+
+<button id="b3" onclick="addRow()">Add Row</button>
+
+<script language="javascript">
+
+	// Generate Table 
+	function generateTable() {
+
+		var myTableDiv = document.getElementById("b1");
+		var myTableRows = document.getElementById("t1").value;
+		var myTableColumns = document.getElementById("t2").value;
+
+		var table = document.createElement('TABLE');
+		table.border = '1';
+
+		var tableBody = document.createElement('TBODY');
+		table.appendChild(tableBody);
+
+		for (var i = 0; i < myTableRows; i++) {
+			var tr = document.createElement('TR');
+			tableBody.appendChild(tr);
+
+			for (var j = 0; j < myTableColumns; j++) {
+				var td = document.createElement('TD');
+				td.width = '200';
+				td.appendChild(document.createTextNode("Cell " + i + "," + j));
+				tr.appendChild(td);
+			}
+		}
+		myTableDiv.appendChild(table);
+		if (myTableDiv !== undefined) {
+			document.getElementById("t1").style.display = 'none';
+			document.getElementById("t2").style.display = 'none';
+			document.getElementById("label_rows").style.display = 'none';
+			document.getElementById("label_cols").style.display = 'none';
+		}
+		else {
+			document.getElementById("t1").style.display = 'block';
+			document.getElementById("t2").style.display = 'block';
+			document.getElementById("label_rows").style.display = 'block';
+			document.getElementById("label_cols").style.display = 'block';
+		}
+
+	}
+
+	//  Add Row function
+	function addRow() {
+		var myTable = document.getElementById('b1').getElementsByTagName('tbody')[0];;
+		//var row = document.getElementById("myTable");
+		var x = myTable.insertRow();
+		var e = myTable.rows.length - 1;
+		var l = myTable.rows[myTable.rows.length - 2].cells.length;
+		for (var c = 0, m = l; c < m; c++) {
+			myTable.rows[e].insertCell(c);
+			myTable.rows[e].cells[c].innerHTML = "Cell " + e + "," + c;
+		}
+
+	}
+
+	// Add Column Function
+	function addColumn() {
+		var myTable = document.getElementById('b1').getElementsByTagName('TBODY')[0];
+		var cellLength = myTable.rows[0].cells.length;
+		tr = myTable.getElementsByTagName("TR");
+		noOfRows = tr.length;
+		for (i = 0; i < noOfRows; i++) {
+			var td = document.createElement('TD');
+			tr[i].appendChild(td);
+			td.width = '200';
+			td.appendChild(document.createTextNode("Cell " + i + "," + cellLength));
+			//myTable.rows[i].insertCell(noOfRows);
+			//myTable.rows[i].cells[noOfRows].innerHTML = "Cell " + i + "," + noOfRows;
+		}
+
+	}
+
+</script>
+
+</html>
